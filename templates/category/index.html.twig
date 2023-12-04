@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1>Liste des category</h1>
+{% if categorys is not empty %}
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Nom </td>
+                <td>Description</td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cat in categorys %}
+            <tr>
+                <td>{{cat.nom}}</td>
+                <td>{{cat.descriptions}} </td>
+                <td>
+                <a href="{{path('category', {"id": cat.id})}}">Afficher
+                </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+{% else %}
+    <p>Il n'y a aucune category</p>
+{% endif %}
+</div>
+{{ form(ajout)}}
+{% endblock %}
