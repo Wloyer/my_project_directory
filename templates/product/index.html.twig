@@ -14,6 +14,8 @@
                 <td>prix</td>
                 <td>quantite</td>
                 <td>category</td>
+                <td>image</td>
+                <td>action</td>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +23,14 @@
             <tr>
                 <td>{{pro.nom}}</td>
                 <td>{{pro.descriptions}} </td>
+                <td>{{pro.prix}} </td>
+                <td>{{pro.quantite}} </td>
+                <td>{{pro.category.nom}} </td> 
+                <td>
+                    {% if pro.image is not null %}
+                        <img src="{{ asset('/uploads/'~pro.image) }}" alt="produit" style="width:200px;">
+                    {% endif %}
+                </td> 
                 <td>
                 <a href="{{path('product', {"id": pro.id})}}">Afficher
                 </a>

@@ -5,8 +5,12 @@ namespace App\Entity;
 use App\Repository\ProduitRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
+#[UniqueEntity('nom')]
+#[ORM\HasLifecycleCallbacks]
 class Produit
 {
     #[ORM\Id]
@@ -15,20 +19,32 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 250,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $descriptions = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?float $prix = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
     private ?int $quantite = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function getId(): ?int
     {
@@ -72,7 +88,7 @@ class Produit
     }
 
     public function getQuantite(): ?int
-    {
+    {   
         return $this->quantite;
     }
 
@@ -93,5 +109,25 @@ class Produit
         $this->category = $category;
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    #[ORM\PostRemove]
+    public function deleteImage(){
+        if($this->image != null){
+            unLink(__DIR__ . '/../../public/uploads/' . $this->image) ;
+    }
+    return true;
     }
 }
