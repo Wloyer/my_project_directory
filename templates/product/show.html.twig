@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}<div class="container">
+    <h1>{{product.nom}}</h1>
+    <p>{{product.descriptions}}</p>
+    <p>{{product.prix}}</p>
+    <p>{{product.quantite}}</p>
+    {# <p>{{product.category}}</p> #}
+    {{form(edit)}}
+    </div>
+{% endblock %}

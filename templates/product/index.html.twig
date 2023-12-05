@@ -1,27 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+{% block title %}Hello ProductController!{% endblock %}
 
 {% block body %}
 <div class="container">
-<h1>Liste des category</h1>
-{% if categorys is not empty %}
+<h1>Liste des produits</h1>
+{% if product is not empty %}
     <table class="table">
         <thead>
             <tr>
                 <td>Nom </td>
                 <td>Description</td>
+                <td>prix</td>
+                <td>quantite</td>
+                <td>category</td>
             </tr>
         </thead>
         <tbody>
-        {% for cat in categorys %}
+        {% for pro in product %}
             <tr>
-                <td>{{cat.nom}}</td>
-                <td>{{cat.descriptions}} </td>
+                <td>{{pro.nom}}</td>
+                <td>{{pro.descriptions}} </td>
                 <td>
-                <a href="{{path('category', {"id": cat.id})}}">Afficher
+                <a href="{{path('product', {"id": pro.id})}}">Afficher
                 </a>
-                <a href="{{path('delete_category', {'id' :cat.id})}}">
+                <a href="{{path('delete_product', {'id' :pro.id})}}">
                 Supprimer
                 </a>
                 </td>
@@ -32,7 +35,7 @@
     
 
 {% else %}
-    <p>Il n'y a aucune category</p>
+    <p>Il n'y a aucun produit</p>
 {% endif %}
 
 {{ form(ajout)}}
