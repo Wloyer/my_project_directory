@@ -47,8 +47,7 @@ class ProductType extends AbstractType
                     ])
                 ],
 ])
-            ->add('Envoyer', SubmitType ::class)
-        ;
+            ->add('Envoyer', SubmitType ::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

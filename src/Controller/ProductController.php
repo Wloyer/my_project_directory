@@ -71,7 +71,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-        $em->persist($produit);
+            $em->persist($produit);
             $em->flush();
             $this->addFlash('success','Produit mis a jour');
         }
