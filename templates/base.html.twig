@@ -19,8 +19,24 @@
     <header>
         <nav style="display:flex ; justify-content:center">
             <ul>
-                <li><a href="{{path('app_category') }}">Categorys</a></li>
-                <li><a href="{{path('app_product') }}">Product</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="{{path('app_logout') }}">Deconnéxion</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{path('app_register') }}">s'inscrire</a>
+                    </li>
+                    <li>
+                        <a href="{{path('app_login') }}">Se connecter</a>
+                    </li>
+                {% endif %}
+                <li>
+                        <a href="{{path('app_category') }}">Categorys</a>
+                    </li>
+                    <li>
+                        <a href="{{path('app_product') }}">Product</a>
+                    </li>
             </ul>
         </nav>
     </header>
