@@ -1,2 +1,6 @@
 category:
   titre: Liste des catégories
+  cree: Catégorie créer
+  nb: Il y a %nb% catégories
+
+Nom: nom

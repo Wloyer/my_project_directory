@@ -5,12 +5,14 @@
 {% block body %}
 <div class="container">
 <h1>{{ 'category.titre' |trans}} </h1>
+<p>{{'category.nb'|trans({'%nb%' : categorys|length}) }}</p>
 {% if categorys is not empty %}
     <table class="table">
         <thead>
             <tr>
-                <td>Nom </td>
+                <td>{{'Nom'|trans}} </td>
                 <td>Description</td>
+                <td>Action</td>
             </tr>
         </thead>
         <tbody>

@@ -6,17 +6,18 @@ use App\Entity\Category;
 Use App\Form\CategoryType;
 Use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/category')]
+#[Route('/{_locale}/category')]
 class CategoryController extends AbstractController
 {   
    
     
     #[Route('/', name: 'app_category')]
-    public function index( EntityManagerInterface $em , Request $request ): Response
+    public function index( EntityManagerInterface $em , Request $request, TranslatorInterface $translator ): Response
     {   
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -27,7 +28,7 @@ class CategoryController extends AbstractController
             $em->persist($category); // prépare la sauvgarde
             $em->flush(); // executer
 
-            $this->addFlash('succes', 'Catégory ajoutée');
+            $this->addFlash('succes', $translator->trans('category.cree'));
         }
 
         $categorys = $em->getRepository (Category::class)->findAll();

@@ -10,7 +10,7 @@ Use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-#[Route('/product')]
+#[Route('/{_locale}/product')]
 class ProductController extends AbstractController
 {
 
